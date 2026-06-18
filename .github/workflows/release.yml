@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Get version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+
+      - name: Assemble release package
+        id: pkg
+        run: |
+          PKG="nju-auto-login-helper-v${{ steps.version.outputs.VERSION }}"
+          mkdir -p "release/$PKG"
+          cp manifest.json "release/$PKG/"
+          cp popup.html popup.js "release/$PKG/"
+          cp options.html styles.css "release/$PKG/"
+          cp nju_captcha.onnx "release/$PKG/"
+          cp -r dist "release/$PKG/"
+          echo "PKG_DIR=release/$PKG" >> "$GITHUB_OUTPUT"
+          echo "PKG_NAME=$PKG" >> "$GITHUB_OUTPUT"
+
+      - name: Create ZIP
+        run: |
+          cd release
+          zip -qr "${{ steps.pkg.outputs.PKG_NAME }}.zip" "${{ steps.pkg.outputs.PKG_NAME }}"
+
+      - name: Create CRX
+        env:
+          KEY: ${{ secrets.CHROME_EXTENSION_PEM }}
+        run: |
+          if [ -n "$KEY" ]; then
+            echo "$KEY" > release/key.pem
+            node scripts/pack-crx.mjs \
+              "${{ steps.pkg.outputs.PKG_DIR }}" \
+              release/key.pem \
+              "release/${{ steps.pkg.outputs.PKG_NAME }}.crx"
+            rm release/key.pem
+          else
+            echo "No CHROME_EXTENSION_PEM secret set; skipping CRX (ZIP only)"
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "v${{ steps.version.outputs.VERSION }}"
+          files: |
+            release/*.zip
+            release/*.crx
+          generate_release_notes: true
+          fail_on_unmatched_files: false
