@@ -7,7 +7,8 @@ import { init as ocrInit, isReady as ocrReady, whenReady as ocrWhenReady, recogn
     studentId: "",
     password: "",
     autoFill: true,
-    autoCaptcha: true
+    autoCaptcha: true,
+    autoLogin: true
   };
 
   var selectors = {
@@ -34,6 +35,15 @@ import { init as ocrInit, isReady as ocrReady, whenReady as ocrWhenReady, recogn
       "#captchaImg",
       "img[id*='captcha' i]",
       "img[src*='captcha' i]"
+    ],
+    login: [
+      "#casLoginForm button[type='submit']",
+      "#casLoginForm input[type='submit']",
+      "button[type='submit']",
+      "input[type='submit']",
+      "button[name='submit']",
+      "#loginButton",
+      "#submit"
     ]
   };
 
@@ -95,6 +105,17 @@ import { init as ocrInit, isReady as ocrReady, whenReady as ocrWhenReady, recogn
         setNativeValue(captchaInput, result.text);
         addStatus("NJU Helper: 已自动识别 (" + result.text + ")", "success");
         captchaImage.classList.remove("nju-autologin-captcha--loading");
+
+        if (settings.autoLogin) {
+          window.setTimeout(function () {
+            var loginBtn = queryFirst(selectors.login);
+            if (loginBtn) {
+              loginBtn.click();
+              addStatus("NJU Helper: 已自动登录", "success");
+            }
+          }, 400);
+        }
+
         return true;
       }
     } catch (err) {

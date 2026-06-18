@@ -1,12 +1,13 @@
 (function () {
   "use strict";
 
-  var DEFAULTS = { studentId: "", password: "", autoFill: true, autoCaptcha: true };
+  var DEFAULTS = { studentId: "", password: "", autoFill: true, autoCaptcha: true, autoLogin: true };
 
   var sid = document.querySelector("#sid");
   var pw  = document.querySelector("#pw");
   var af  = document.querySelector("#af");
   var ac  = document.querySelector("#ac");
+  var al  = document.querySelector("#al");
   var msg = document.querySelector("#msg");
 
   function show(text, isErr) {
@@ -23,6 +24,7 @@
       pw.value = s.password || "";
       af.checked = s.autoFill !== false;
       ac.checked = s.autoCaptcha !== false;
+      al.checked = s.autoLogin !== false;
     });
   }
 
@@ -31,7 +33,8 @@
       studentId: sid.value.trim(),
       password: pw.value,
       autoFill: af.checked,
-      autoCaptcha: ac.checked
+      autoCaptcha: ac.checked,
+      autoLogin: al.checked
     };
   }
 

@@ -5,7 +5,8 @@
     studentId: "",
     password: "",
     autoFill: true,
-    autoCaptcha: true
+    autoCaptcha: true,
+    autoLogin: true
   };
 
   var form = document.querySelector("#settings-form");
@@ -14,7 +15,8 @@
     studentId: document.querySelector("#student-id"),
     password: document.querySelector("#password"),
     autoFill: document.querySelector("#auto-fill"),
-    autoCaptcha: document.querySelector("#auto-captcha")
+    autoCaptcha: document.querySelector("#auto-captcha"),
+    autoLogin: document.querySelector("#auto-login")
   };
 
   function setStatus(text) {
@@ -29,7 +31,8 @@
       studentId: fields.studentId.value.trim(),
       password: fields.password.value,
       autoFill: fields.autoFill.checked,
-      autoCaptcha: fields.autoCaptcha.checked
+      autoCaptcha: fields.autoCaptcha.checked,
+      autoLogin: fields.autoLogin.checked
     };
   }
 
@@ -38,6 +41,7 @@
     fields.password.value = settings.password || "";
     fields.autoFill.checked = Boolean(settings.autoFill);
     fields.autoCaptcha.checked = Boolean(settings.autoCaptcha);
+    fields.autoLogin.checked = settings.autoLogin !== false;
   }
 
   chrome.storage.local.get(DEFAULT_SETTINGS, fillForm);
