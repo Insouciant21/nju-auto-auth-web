@@ -1,0 +1,140 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.nju-autologin-status {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483647;
+  max-width: min(360px, calc(100vw - 36px));
+  padding: 10px 14px;
+  border: 1px solid #c9d6e2;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24313d;
+  box-shadow: 0 8px 24px rgba(20, 31, 42, 0.16);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.nju-autologin-status[data-type="success"] {
+  border-color: #70b58f;
+}
+
+.nju-autologin-status[data-type="warning"] {
+  border-color: #d7a33d;
+}
+
+.nju-options-page {
+  margin: 0;
+  min-height: 100vh;
+  background: #f6f8fb;
+  color: #1f2933;
+}
+
+.nju-options {
+  width: min(520px, calc(100vw - 32px));
+  margin: 48px auto;
+  padding: 28px;
+  border: 1px solid #d9e2ec;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgba(31, 41, 51, 0.08);
+}
+
+.nju-options__header h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.nju-options__header p {
+  margin: 0 0 24px;
+  color: #52606d;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.nju-options__form {
+  display: grid;
+  gap: 16px;
+}
+
+.nju-field {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nju-field input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 8px 10px;
+  border: 1px solid #bcccdc;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 400;
+}
+
+.nju-field input:focus {
+  border-color: #2563eb;
+  outline: 3px solid rgba(37, 99, 235, 0.16);
+}
+
+.nju-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #334e68;
+  font-size: 14px;
+}
+
+.nju-check input {
+  width: 16px;
+  height: 16px;
+}
+
+.nju-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.nju-actions button {
+  min-height: 38px;
+  padding: 8px 14px;
+  border: 1px solid #9fb3c8;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1f2933;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nju-actions button[type="submit"] {
+  border-color: #1d4ed8;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.nju-actions button:hover {
+  filter: brightness(0.98);
+}
+
+.nju-autologin-captcha--loading {
+  opacity: 0.55;
+  filter: grayscale(25%);
+}
+
+.nju-save-status {
+  min-height: 20px;
+  margin: 0;
+  color: #2f855a;
+  font-size: 14px;
+}

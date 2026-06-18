@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "NJU Auto Login Helper",
+  "description": "A local helper for NJU unified authentication login form autofill with captcha recognition.",
+  "version": "0.2.1",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://authserver.nju.edu.cn/*"
+  ],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://authserver.nju.edu.cn/authserver/login*"
+      ],
+      "js": [
+        "dist/content.bundle.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["nju_captcha.onnx"],
+      "matches": ["https://authserver.nju.edu.cn/*"]
+    }
+  ],
+  "action": {
+    "default_title": "NJU Auto Login Helper",
+    "default_popup": "popup.html"
+  }
+}

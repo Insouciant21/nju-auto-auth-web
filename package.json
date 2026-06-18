@@ -1,0 +1,21 @@
+{
+  "name": "NJUAutoLogin Plugin",
+  "version": "1.0.0",
+  "description": "NJU unified-auth login helper — Chrome extension with captcha OCR",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/content.js --bundle --format=iife --outfile=dist/content.bundle.js && esbuild src/options.js --bundle --format=iife --outfile=dist/options.bundle.js",
+    "watch": "esbuild src/content.js --bundle --format=iife --outfile=dist/content.bundle.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.28.2",
+  "dependencies": {
+    "onnxruntime-web": "^1.26.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1",
+    "ws": "^8.21.0"
+  }
+}

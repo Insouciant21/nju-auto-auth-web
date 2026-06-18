@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NJU Auto Login Helper</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="nju-options-page">
+    <main class="nju-options">
+      <header class="nju-options__header">
+        <h1>NJU Auto Login Helper</h1>
+        <p>本地保存账号配置，自动填充学号、密码和验证码。</p>
+      </header>
+
+      <form id="settings-form" class="nju-options__form">
+        <label class="nju-field">
+          <span>学号</span>
+          <input id="student-id" name="studentId" type="text" autocomplete="username" required>
+        </label>
+
+        <label class="nju-field">
+          <span>密码</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+        </label>
+
+        <label class="nju-check">
+          <input id="auto-fill" name="autoFill" type="checkbox" checked>
+          <span>自动填充学号和密码</span>
+        </label>
+
+        <label class="nju-check">
+          <input id="auto-captcha" name="autoCaptcha" type="checkbox" checked>
+          <span>自动识别验证码（本地 AI 模型）</span>
+        </label>
+
+        <div class="nju-actions">
+          <button type="submit">保存</button>
+          <button id="open-login" type="button">打开登录页</button>
+        </div>
+
+        <p id="save-status" class="nju-save-status" role="status" aria-live="polite"></p>
+      </form>
+    </main>
+
+    <script src="dist/options.bundle.js"></script>
+  </body>
+</html>
